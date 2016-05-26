@@ -24,9 +24,6 @@
 		1FD605941CF410D5003E9DAE /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD605931CF410D5003E9DAE /* Tweet.swift */; };
 		1FD605951CF410D5003E9DAE /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD605931CF410D5003E9DAE /* Tweet.swift */; };
 		1FD605961CF410D5003E9DAE /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD605931CF410D5003E9DAE /* Tweet.swift */; };
-		1FD6059C1CF4308D003E9DAE /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6059B1CF4308D003E9DAE /* ImageProvider.swift */; };
-		1FD6059D1CF4308D003E9DAE /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6059B1CF4308D003E9DAE /* ImageProvider.swift */; };
-		1FD6059E1CF4308D003E9DAE /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD6059B1CF4308D003E9DAE /* ImageProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +61,6 @@
 		1FD605851CF403BB003E9DAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FD605911CF41073003E9DAE /* TweetDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDownload.swift; sourceTree = "<group>"; };
 		1FD605931CF410D5003E9DAE /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
-		1FD6059B1CF4308D003E9DAE /* ImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +117,6 @@
 				1FD605911CF41073003E9DAE /* TweetDownload.swift */,
 				1FD605931CF410D5003E9DAE /* Tweet.swift */,
 				1FD4CC8F1CF4CB1E003824A8 /* TweetCell.swift */,
-				1FD6059B1CF4308D003E9DAE /* ImageProvider.swift */,
 				1FD605671CF403BB003E9DAE /* Main.storyboard */,
 				1FD6056A1CF403BB003E9DAE /* Assets.xcassets */,
 				1FD6056C1CF403BB003E9DAE /* LaunchScreen.storyboard */,
@@ -281,7 +276,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FD605921CF41073003E9DAE /* TweetDownload.swift in Sources */,
-				1FD6059C1CF4308D003E9DAE /* ImageProvider.swift in Sources */,
 				1FD605661CF403BB003E9DAE /* TweetsViewController.swift in Sources */,
 				1FD4CC901CF4CB1E003824A8 /* TweetCell.swift in Sources */,
 				1FD605641CF403BB003E9DAE /* AppDelegate.swift in Sources */,
@@ -295,7 +289,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FD4CC951CF51637003824A8 /* HomeViewController.swift in Sources */,
-				1FD6059D1CF4308D003E9DAE /* ImageProvider.swift in Sources */,
 				1FD605791CF403BB003E9DAE /* PeekTests.swift in Sources */,
 				1FD605951CF410D5003E9DAE /* Tweet.swift in Sources */,
 				1FD4CC911CF4CB1E003824A8 /* TweetCell.swift in Sources */,
@@ -307,7 +300,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FD4CC961CF51637003824A8 /* HomeViewController.swift in Sources */,
-				1FD6059E1CF4308D003E9DAE /* ImageProvider.swift in Sources */,
 				1FD605841CF403BB003E9DAE /* PeekUITests.swift in Sources */,
 				1FD605961CF410D5003E9DAE /* Tweet.swift in Sources */,
 				1FD4CC921CF4CB1E003824A8 /* TweetCell.swift in Sources */,

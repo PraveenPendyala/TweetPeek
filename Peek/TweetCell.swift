@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import Foundation
+
+protocol TweetCellDelegate {
+    func reTweet(id: IntMax)
+}
 
 class TweetCell: UITableViewCell{
-
+    
+    var delegate: TweetCellDelegate?
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
+    
     //adding values to the labels in the cell
 
     var tweet: Tweet!{
@@ -22,10 +30,9 @@ class TweetCell: UITableViewCell{
         }
         
     }
+    
     @IBAction func retweetBtn(sender: AnyObject) {
         
-        NSNotificationCenter.defaultCenter().postNotificationName("retweetNotification", object: nil, userInfo: ["tweet": tweet])
+        self.delegate?.reTweet(tweet.id)
     }
-    
-    
 }

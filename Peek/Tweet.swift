@@ -12,14 +12,15 @@ class Tweet {
     
     var name: String
     var tweet: String
-    var avatar: String
+    var avatar: NSData
     var id: IntMax
     
     init(name: String, tweet: String, avatar: String, id: String)
     {
         self.name = name
         self.tweet = tweet
-        self.avatar = avatar
         self.id = IntMax(id)!
+        let avatarURL = NSURL(string: avatar)
+        self.avatar = NSData(contentsOfURL: avatarURL!)!
     }
 }

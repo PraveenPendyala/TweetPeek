@@ -9,10 +9,12 @@
 import Foundation
 
 protocol TweetDownloadDelegate{
-    func finishedDownloading(tweet:Tweet)
+    func finishedDownloading()
 }
 
 public class TweetDownload:NSObject {
+    
+    var tweets = [Tweet]()
     
     var delegate:TweetDownloadDelegate?
     
@@ -76,7 +78,7 @@ public class TweetDownload:NSObject {
     
     // MARK:- Service Call
     
-    func getResponseForRequest(url:String) {
+    func getResponseForRequest(url:String, refresh: Bool) {
         
         getBearerToken({ (bearerToken) -> Void in
             
@@ -88,15 +90,16 @@ public class TweetDownload:NSObject {
             request.addValue(token, forHTTPHeaderField: "Authorization")
             
             NSURLSession.sharedSession() .dataTaskWithRequest(request, completionHandler: { (data: NSData?, response:NSURLResponse?, error: NSError?) -> Void in
-                
-                self.processResult(data!, response: response!, error: error)
+                self.processResult(data!, response: response!, error: error, refresh: refresh)
                 
             }).resume()
         })
         
     }
     
-    func postRequest(url:String) {
+    func postRequest(url:String, completionBolck:(message : String) -> Void){
+        
+        var errMsg: String = "None"
         
         getBearerToken({ (bearerToken) -> Void in
             
@@ -108,13 +111,15 @@ public class TweetDownload:NSObject {
             request.addValue(token, forHTTPHeaderField: "Authorization")
             
             NSURLSession.sharedSession() .dataTaskWithRequest(request, completionHandler: { (data: NSData?, response:NSURLResponse?, error: NSError?) -> Void in
-                self.Result(data!, response: response!, error: error)
+                 errMsg = self.Result(data!, response: response!, error: error)
+                 completionBolck(message: errMsg)
             }).resume()
         })
-        
     }
     
-    func Result(data: NSData, response:NSURLResponse, error: NSError?) {
+    func Result(data: NSData, response:NSURLResponse, error: NSError?) -> String{
+        
+        var errMsg: String = "None"
         
         do {
             
@@ -122,34 +127,38 @@ public class TweetDownload:NSObject {
                 
                 if let statuses = results["statuses"] as? NSMutableArray {
                     for status in statuses {
-                        let user = status["user"] as? NSDictionary
-                        let tweet = Tweet(name: user!["name"] as! String, tweet: status["text"] as! String, avatar: user!["profile_image_url_https"] as! String, id: status["id_str"] as! String)
-                        self.delegate?.finishedDownloading(tweet)
+                        return status["id"] as! String
                     }
                     
                 } else {
-                    print(results["errors"])
+                    let errors = results["errors"] as? NSMutableArray
+                    let error = errors![0] as! NSDictionary
+                    errMsg = error["message"] as! String
                 }
             }
         } catch let error as NSError {
             print(error.localizedDescription)
         }
+        return errMsg
     }
     
     // MARK:- Process results
     
-    func processResult(data: NSData, response:NSURLResponse, error: NSError?) {
+    func processResult(data: NSData, response:NSURLResponse, error: NSError?, refresh: Bool){
         
         do {
-            
             if let results: NSDictionary = try NSJSONSerialization .JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments  ) as? NSDictionary {
-                
                 if let statuses = results["statuses"] as? NSMutableArray {
+                    if(refresh == true)
+                    {
+                        tweets.removeAll() 
+                    }
                     for status in statuses {
                         let user = status["user"] as? NSDictionary
                         let tweet = Tweet(name: user!["name"] as! String, tweet: status["text"] as! String, avatar: user!["profile_image_url_https"] as! String, id: status["id_str"] as! String)
-                        self.delegate?.finishedDownloading(tweet)
+                        tweets.append(tweet)
                     }
+                    self.delegate?.finishedDownloading()
                     
                 } else {
                     print(results["errors"])
